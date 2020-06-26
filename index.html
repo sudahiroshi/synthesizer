@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="sound.js"></script>
     <script src="synth.js"></script>
     <script src="synth_ui.js"></script>
     <link rel="stylesheet" href="synth.css" />
@@ -35,7 +36,7 @@
         <div class="tab_content_description">
           <p class="c-txtsp">
               <input type="range" name="x00" id="x00" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x01" id="x01" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+              <input type="range" name="x01" id="x01" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">
               <input type="range" name="x02" id="x02" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
               <input type="range" name="x03" id="x03" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
               <input type="range" name="x04" id="x04" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
@@ -60,7 +61,10 @@
       </div>
       <div class="tab_content" id="envelope_content">
         <div class="tab_content_description">
-          <p class="c-txtsp">デザインの内容がここに入ります</p>
+            <input type="range" name="attack" id="attack"min="0" max="1" step="0.01" value="0">
+            <input type="range" name="decay" id="decay"min="0" max="1" step="0.01" value="0">
+            <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+            <input type="range" name="release" id="release"min="0" max="1" step="0.01" value="500">
         </div>
       </div>
       <div class="tab_content" id="wave_content">

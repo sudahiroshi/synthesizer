@@ -1,23 +1,28 @@
 window.addEventListener('load', () => {
-    let synth = new Synth();
-    let ui = new SynthUI( synth );
+    let sound = new Sound();
+    let ui = new SynthUI( sound );
     ui.set_event();
     ui.set_keyboard();
 })
 
 class SynthUI {
-    constructor( synth ) {
-        this.synth = synth;
+    constructor( sound ) {
+        this.down = "touchstart";
+        this.up = "touchend";
+        this.sound = sound;
         this.spectrum = {};
         this.spectrum_ui = [];
+        this.playing = {};
         for( let i=0; i<10; i++ ) {
             this.spectrum_ui.push( document.querySelector("#x0"+i) );
-            this.spectrum["x0"+i] = i;
+            this.spectrum["x0"+i] = 0;
         }
         for( let i=10; i<=20; i++ ) {
             this.spectrum_ui.push( document.querySelector("#x"+i) );
-            this.spectrum["x"+i] = i;
+            this.spectrum["x"+i] = 0;
         }
+
+        this.envelope_ui = [ "attack", "decay", "sustain", "release" ].map( (name) => document.querySelector( "#"+name ));
         this.keys = [
             "c3","c3s","d3","d3s","e3","f3","f3s","g3","g3s","a3","a3s","b3",
             "c4","c4s","d4","d4s","e4","f4","f4s","g4","g4s","a4","a4s","b4"
@@ -79,15 +84,22 @@ class SynthUI {
     }
 
     get_spectrum() {
-        return this.spectrum_ui.map( ui => ui.value);
+        return this.spectrum_ui.map( ui => Number( ui.value ) );
     }
 
     set_spectrum( array ) {
-        for( let i=1; i<10; i++ ) {
+        for( let i=1; i<=20; i++ ) {
             this.spectrum_ui[i].value = array[i];
         }
-        for( let i=10; i<=20; i++ ) {
-            this.spectrum_ui[i].value = array[i];
+    }
+
+    get_envelope() {
+        return this.envelope_ui.map( ui => Number(ui.value) );
+    }
+
+    set_envelope( array ) {
+        for( let i=0; i<4; i++ ) {
+            this.envelope_ui[i].value = array[i];
         }
     }
 
@@ -99,7 +111,7 @@ class SynthUI {
             }
             dummy_array[1] = 1;
             this.set_spectrum( dummy_array );
-            this.synth.play2( 440, dummy_array );
+            this.set_envelope( [ 0.5, 0.5, 0.5, 0.5 ] );
         });
         document.querySelector('#piano2').addEventListener('click', () => {
             let dummy_array = new Array(21);
@@ -109,7 +121,7 @@ class SynthUI {
             dummy_array[1] = 1;
             for( let i=2; i<=20; i+=2 )  dummy_array[i] = 1;
             this.set_spectrum( dummy_array );
-            this.synth.play2( 440, dummy_array );
+            this.set_envelope( [ 0.01, 0.9, 0, 0]);
         });
         document.querySelector('#piano').addEventListener('click', () => {
             let dummy_array = new Array(21);
@@ -118,15 +130,28 @@ class SynthUI {
             }
             for( let i=1; i<=20; i+=2 )  dummy_array[i] = 1;
             this.set_spectrum( dummy_array );
-            this.synth.play2( 440, dummy_array );
+            this.set_envelope( [ 0.01, 0.9, 0, 0]);
         });
     }
 
     set_keyboard() {
         for( let [key, value] of Object.entries(this.freq) ) {
-            document.querySelector('#' + key).addEventListener('click', () => {
-                this.synth.play2( value, this.get_spectrum() );
-            })
+            document.querySelector('#' + key).addEventListener(this.down, () => {
+                let tone = new Synth( this.sound.ctx, value, this.get_spectrum() );
+                tone.play2( this.get_envelope() );
+                console.log("key down");
+                document.querySelector('#' + key).addEventListener(this.up, (ev) => {
+                    if(!tone) {}
+                    return function f() {
+                        console.log("key up");
+                        tone.stop2();
+                        setTimeout( () => {
+                            tone = null;
+                        }, 2500 );
+                        ev.srcElement.removeEventListener(this.up, f, false );
+                    }
+                });
+            });
         }
         // document.querySelector('#a3').addEventListener('click', () => {
         //     this.synth.play2( this.freq["a3"], this.get_spectrum() );
