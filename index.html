@@ -6,6 +6,7 @@
     <title>Document</title>
     <script src="sound.js"></script>
     <script src="synth.js"></script>
+    <script src="envelope.js"></script>
     <script src="synth_ui.js"></script>
     <link rel="stylesheet" href="synth.css" />
   </head>
@@ -27,8 +28,11 @@
         <div class="tab_content_description">
           <p class="c-txtsp">
               <button id="sin">sin波</button>単純な波形の例<br>
-              <button id="piano">ピアノ</button>基数倍音で構成された音<br>
-              <button id="piano2">ピアノ</button>偶数倍音で構成された音<br>
+              <button id="piano">ピアノ</button>奇数倍音で構成された音<br>
+              <button id="organ">オルガン</button>奇数倍音で構成され，音量が下がりにくい<br>
+              <button id="violin">バイオリン</button>高い周波数まで含まれる<br>
+              <button id="clarinet">クラリネット</button>奇数倍音<br>
+              <button id="flute">フルート</button>低めの周波数のみ<br>
           </p>
         </div>
       </div>
@@ -61,11 +65,14 @@
       </div>
       <div class="tab_content" id="envelope_content">
         <div class="tab_content_description">
-            <input type="range" name="attack" id="attack"min="0" max="1" step="0.01" value="0">
-            <input type="range" name="decay" id="decay"min="0" max="1" step="0.01" value="0">
-            <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-            <input type="range" name="release" id="release"min="0" max="1" step="0.01" value="500">
-        </div>
+            <div>
+                <canvas id="env_canvas" width="400px" height="150px"></canvas>
+                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">            </div>
+            </div>
+            <input type="range" name="attack" id="attack"min="0" max="1" step="0.01" value="0.0">
+            <input type="range" name="decay" id="decay"min="0" max="1" step="0.01" value="0.0">
+            <input type="range" name="release" id="release"min="0" max="1" step="0.01" value="0.0">
+
       </div>
       <div class="tab_content" id="wave_content">
         <div class="tab_content_description">

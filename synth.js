@@ -6,7 +6,6 @@ class Synth {
      * @param {Array} spectrum スペクトラムの配列
      */
     constructor( ctx, frequency, spectrum ) {
-        console.log(ctx.currentTime);
         this.number = spectrum.length;
         this.oscNode = new Array(this.number);
         this.gainNode = new Array(this.number);
@@ -30,15 +29,19 @@ class Synth {
 
     /**
      * 合成音を鳴らす
-     * @param {Number} attack 音量が最大になるまでの時間(ms)
-     * @param {Number} decay 音量が最大からSustainレベルになるまでの時間(ms)
-     * @param {Number} sustain Sustainレベル
+     * @param {Array} array 以下のパラメータ要素を持つ配列
+     *
+     * 0 attack 音量が最大になるまでの時間(ms)
+     * 1 decay 音量が最大からSustainレベルになるまでの時間(ms)
+     * 2 sustain Sustainレベル
+     * 3 release キーＯＦＦから音量0になるまでの時間（ms)
      */
-    play2( array ) {
+    play( array ) {
         let attack = array[0];
         let decay = array[1];
         let sustain = array[2];
         this.release = array[3];
+        this.masterGain.gain.value = 0;
         for( let i=1; i<this.number; i++ ) {
             this.oscNode[i].start();
         }
@@ -52,19 +55,28 @@ class Synth {
 
     /**
      * キーＯＦＦで徐々に音量を下げる
-     * @param {Number} release 音量が0になるまでの時間(ms)
      */
-    stop2() {
-        console.log(this.release*2.0);
+    stop() {
         let now = this.ctx.currentTime;
         if( this.masterGain.gain.cancelAndHoldAtTime )
             this.masterGain.gain.cancelAndHoldAtTime(now);
+        //else this.masterGain.gain = sustain;
         this.masterGain.gain.setTargetAtTime( 0, now, this.release );
-        // setTimeout( () => {
-        //     for( let i=1; i<this.number; i++ ) {
-        //         this.oscNode[i].stop();
-        //     }
-        // }, this.release*2000 );
+        for( let i=1; i<this.number; i++ ) {
+            this.oscNode[i].stop( now + this.release);
+        }
+    }
+    /**
+     * キーＯＦＦですぐに鳴り終わる
+     */
+    stop2() {
+        let now = this.ctx.currentTime;
+        if( this.masterGain.gain.cancelAndHoldAtTime )
+            this.masterGain.gain.cancelAndHoldAtTime(now);
+        else this.masterGain.gain.value = 0;
+        for( let i=1; i<this.number; i++ ) {
+            this.oscNode[i].stop( now + this.release);
+        }
     }
     // /**
     //  * 基本波形を鳴らす
