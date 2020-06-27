@@ -128,3 +128,7 @@ input[name="tab_item"] {
     -webkit-appearance: slider-vertical;
     width: 30px;
 }
+
+.invisible {
+    display: none;
+}
