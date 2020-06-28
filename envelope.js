@@ -1,4 +1,11 @@
+/**
+ * 音のエンベロープに関するクラス
+ */
 class Envelope {
+    /**
+     * コンストラクタ
+     * @param {Array<String>} ui エンベロープ関連の要素名(String)の配列
+     */
     constructor( ui ) {
         this.ui = ui;
 
@@ -27,6 +34,9 @@ class Envelope {
         this.draw_graph();
     }
 
+    /**
+     * エンベロープのグラフを描画する
+     */
     draw_graph() {
         let [attack, decay, sustain, release] = this.get_envelope();
 
@@ -62,6 +72,10 @@ class Envelope {
         this.ctx.stroke();
     }
 
+    /**
+     * エンベロープに関連する4つのスライダから値を取得する
+     * @return {Array<Number>} エンベロープの内容
+     */
     get_envelope() {
         return this.ui.map( ui => Number(ui.value) );
     }

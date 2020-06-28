@@ -6,6 +6,10 @@ window.addEventListener('load', () => {
 })
 
 class SynthUI {
+    /**
+     * コンストラクタ
+     * @param {Sound} sound Soundクラスのインスタンス
+     */
     constructor( sound ) {
         this.sound = sound;
         this.spectrum = {};
@@ -82,26 +86,45 @@ class SynthUI {
         };
     }
 
+    /**
+     * 画面に並んだスライダーからスペクトルを取得する
+     * @return {Array<Number>} スペクトル（Number）の配列
+     */
     get_spectrum() {
         return this.spectrum_ui.map( ui => Number( ui.value ) );
     }
 
+    /**
+     * 配列で与えられたスペクトルをスライダーにセットする
+     * @param {Array<Number>} array スペクトルの配列(Number)　値は0〜1
+     */
     set_spectrum( array ) {
         for( let i=1; i<=20; i++ ) {
             this.spectrum_ui[i].value = array[i];
         }
     }
 
+    /**
+     * 画面に並んだエンベロープ関係のスライダーから値を取得する
+     * @return {Array<Number>} Numberの配列　値は0〜1
+     */
     get_envelope() {
         return this.envelope_ui.map( ui => Number(ui.value) );
     }
 
+    /**
+     * 配列で与えられたエンベロープ関連のパラメータをスライダーにセットする
+     * @param {Array<Number>} array エンベロープ関係(Number)の配列　値は0〜1
+     */
     set_envelope( array ) {
         for( let i=0; i<4; i++ ) {
             this.envelope_ui[i].value = array[i];
         }
     }
 
+    /**
+     * 楽器選択画面のイベントを設定する
+     */
     set_event() {
         document.querySelector('#sin').addEventListener('click', () => {
             let dummy_array = new Array(21);
@@ -119,7 +142,7 @@ class SynthUI {
                 dummy_array[i] = 0;
             }
             //dummy_array[1] = 1;
-            for( let i=1; i<=20; i+=2 )  dummy_array[i] = 1.0/i;
+            for( let i=1; i<=6; i++ )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
             this.set_envelope( [ 0.01, 0.9, 0, 0]);
             this.envelope.draw_graph();
@@ -148,8 +171,8 @@ class SynthUI {
             for( let i=0; i<=20; i++ ) {
                 dummy_array[i] = 0;
             }
-            dummy_array[1] = 1;
-            for( let i=2; i<=20; i+=2 )  dummy_array[i] = 1.0/i;
+            //dummy_array[1] = 1;
+            for( let i=1; i<=7; i+=2 )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
             this.set_envelope( [ 0.1, 1.0, 0, 0.3]);
             this.envelope.draw_graph();
@@ -159,13 +182,18 @@ class SynthUI {
             for( let i=0; i<=20; i++ ) {
                 dummy_array[i] = 0;
             }
-            for( let i=1; i<=6; i++ )  dummy_array[i] = 1.0/i;
+            dummy_array[1] = 0.5;
+            dummy_array[2] = 0.8;
+            dummy_array[3] = 0.3;
             this.set_spectrum( dummy_array );
-            this.set_envelope( [ 0.1, 1.0, 0, 0.3]);
+            this.set_envelope( [ 0.1, 0.0, 0.9, 0.3]);
             this.envelope.draw_graph();
         });
     }
 
+    /**
+     * 鍵盤関係のイベントを設定する
+     */
     set_keyboard() {
         for( let [key, value] of Object.entries(this.freq) ) {
             let playing = false;
