@@ -41,7 +41,7 @@ input[name="tab_item"] {
   clear: both;
   overflow: hidden;
   border: solid;
-  height: 200px;
+  height: 400px;
 }
 
 /*選択されているタブのコンテンツのみを表示*/
@@ -61,7 +61,7 @@ input[name="tab_item"] {
 .keybord {
   display: block;
   width: 842px;
-  height: 250px;
+  height: 200px;
 }
 .key {
   position: relative;
@@ -79,7 +79,7 @@ input[name="tab_item"] {
   border-radius: 0 0 10px 10px;
   background-color: #000000;
   width: 50px;
-  height: 125px;
+  height: 85px;
   z-index: 100;
 }
 .brack_key:after {
@@ -96,10 +96,10 @@ input[name="tab_item"] {
   background-image: -o-linear-gradient(rgb(0, 0, 0), rgb(30, 30, 30));
   box-shadow: 0px -1px 2px 0px rgb(50, 50, 50) inset;
   width: 32px;
-  height: 108px;
+  height: 68px;
 }
 .brack_key:hover:after {
-  height: 112px;
+  height: 72px;
 }
 /*END brack_key*/
 
@@ -114,13 +114,13 @@ input[name="tab_item"] {
   border: 2px solid #b3b3b3;
   border-top: none;
   width: 58px;
-  height: 230px;
+  height: 150px;
 }
 .white_key:hover {
   top: 0px;
   background-color: #e6e6e6;
   box-shadow: none;
-  height: 233px;
+  height: 150px;
 }
 /*END white_key*/
 

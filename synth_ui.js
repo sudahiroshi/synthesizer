@@ -13,6 +13,7 @@ class SynthUI {
     constructor( sound ) {
         this.sound = sound;
         this.spectrum = {};
+        this.wave = new Wave( document.querySelector('#wave_graph') );
         this.spectrum_ui = [];
         for( let i=0; i<10; i++ ) {
             this.spectrum_ui.push( document.querySelector("#x0"+i) );
@@ -22,9 +23,15 @@ class SynthUI {
             this.spectrum_ui.push( document.querySelector("#x"+i) );
             this.spectrum["x"+i] = 0;
         }
+        for( let ui of this.spectrum_ui ) {
+            ui.addEventListener('input', () => {
+                this.wave.draw( this.get_spectrum() );
+            });
+        }
+        this.wave.draw( this.get_spectrum() );
 
         this.envelope_ui = [ "attack", "decay", "sustain", "release" ].map( (name) => document.querySelector( "#"+name ));
-        this.envelope = new Envelope( this.envelope_ui );
+        this.envelope = new Envelope( this.envelope_ui, document.querySelector('#env_graph'), this );
 
         this.keys = [
             "c3","c3s","d3","d3s","e3","f3","f3s","g3","g3s","a3","a3s","b3",
@@ -120,6 +127,7 @@ class SynthUI {
         for( let i=0; i<4; i++ ) {
             this.envelope_ui[i].value = array[i];
         }
+        this.envelope.set_envelope( array );
     }
 
     /**
@@ -133,6 +141,7 @@ class SynthUI {
             }
             dummy_array[1] = 1;
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.0, 0.0, 1.0, 0.0 ] );
             this.envelope.draw_graph();
         });
@@ -144,6 +153,7 @@ class SynthUI {
             //dummy_array[1] = 1;
             for( let i=1; i<=6; i++ )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.01, 0.9, 0, 0]);
             this.envelope.draw_graph();
         });
@@ -154,6 +164,7 @@ class SynthUI {
             }
             for( let i=1; i<=20; i+=2 )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.01, 0.9, 1, 0.2]);
             this.envelope.draw_graph();
         });
@@ -163,6 +174,7 @@ class SynthUI {
                 dummy_array[i] = 1.0/i;
             }
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.01, 0.9, 1, 0.2]);
             this.envelope.draw_graph();
         });
@@ -174,6 +186,7 @@ class SynthUI {
             //dummy_array[1] = 1;
             for( let i=1; i<=7; i+=2 )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.1, 1.0, 0, 0.3]);
             this.envelope.draw_graph();
         });
@@ -186,6 +199,7 @@ class SynthUI {
             dummy_array[2] = 0.8;
             dummy_array[3] = 0.3;
             this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
             this.set_envelope( [ 0.1, 0.0, 0.9, 0.3]);
             this.envelope.draw_graph();
         });

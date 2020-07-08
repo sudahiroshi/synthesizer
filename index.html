@@ -8,6 +8,7 @@
     <script src="synth.js"></script>
     <script src="envelope.js"></script>
     <script src="synth_ui.js"></script>
+    <script src="wave.js"></script>
     <link rel="stylesheet" href="synth.css" />
   </head>
   <body>
@@ -21,8 +22,8 @@
       <input id="envelope" type="radio" name="tab_item" />
       <label class="tab_item" for="envelope">エンベロープ</label>
 
-      <input id="wave" type="radio" name="tab_item" />
-      <label class="tab_item" for="wave">波形</label>
+<!--       <input id="wave" type="radio" name="tab_item" />
+      <label class="tab_item" for="wave">波形</label> -->
 
       <div class="tab_content" id="instrument_content">
         <div class="tab_content_description">
@@ -34,6 +35,61 @@
               <button id="clarinet">クラリネット</button>奇数倍音<br>
               <button id="flute">フルート</button>低めの周波数のみ<br>
           </p>
+        </div>
+        <div class="keybord" ontouchstart="">
+          <div class="key">
+            <div class="white_key" id="c3"></div>
+            <div class="brack_key" id="c3s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="d3"></div>
+            <div class="brack_key" id="d3s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="e3"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="f3"></div>
+            <div class="brack_key" id="f3s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="g3"></div>
+            <div class="brack_key" id="g3s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="a3"></div>
+            <div class="brack_key" id="a3s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="b3"></div>
+          </div>
+    
+          <div class="key">
+            <div class="white_key" id="c4"></div>
+            <div class="brack_key" id="c4s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="d4"></div>
+            <div class="brack_key" id="d4s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="e4"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="f4"></div>
+            <div class="brack_key" id="f4s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="g4"></div>
+            <div class="brack_key" id="g4s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="a4"></div>
+            <div class="brack_key" id="a4s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="b4"></div>
+          </div>
         </div>
       </div>
       <div class="tab_content" id="spectrum_content">
@@ -62,78 +118,20 @@
               <input type="range" name="x20" id="x20" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
           </p>
         </div>
+        <canvas id="wave_graph" width="800px" height="200px"></canvas>
       </div>
       <div class="tab_content" id="envelope_content">
         <div class="tab_content_description">
             <div>
                 <canvas id="env_canvas" width="400px" height="150px"></canvas>
-                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">            </div>
+                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="1">            </div>
             </div>
-            <input type="range" name="attack" id="attack"min="0" max="1" step="0.01" value="0.0">
-            <input type="range" name="decay" id="decay"min="0" max="1" step="0.01" value="0.0">
-            <input type="range" name="release" id="release"min="0" max="1" step="0.01" value="0.0">
-
-      </div>
-      <div class="tab_content" id="wave_content">
-        <div class="tab_content_description">
-          <p class="c-txtsp">波形</p>
-        </div>
+            <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.0">
+            <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.0">
+            <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.0">
+            <canvas id="env_graph" width="800px" height="200px"></canvas>
       </div>
     </div>
-    <div class="keybord" ontouchstart="">
-      <div class="key">
-        <div class="white_key" id="c3"></div>
-        <div class="brack_key" id="c3s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="d3"></div>
-        <div class="brack_key" id="d3s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="e3"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="f3"></div>
-        <div class="brack_key" id="f3s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="g3"></div>
-        <div class="brack_key" id="g3s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="a3"></div>
-        <div class="brack_key" id="a3s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="b3"></div>
-      </div>
 
-      <div class="key">
-        <div class="white_key" id="c4"></div>
-        <div class="brack_key" id="c4s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="d4"></div>
-        <div class="brack_key" id="d4s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="e4"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="f4"></div>
-        <div class="brack_key" id="f4s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="g4"></div>
-        <div class="brack_key" id="g4s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="a4"></div>
-        <div class="brack_key" id="a4s"></div>
-      </div>
-      <div class="key">
-        <div class="white_key" id="b4"></div>
-      </div>
-    </div>
   </body>
 </html>
