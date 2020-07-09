@@ -33,17 +33,17 @@ class SynthUI {
         this.envelope_ui = [ "attack", "decay", "sustain", "release" ].map( (name) => document.querySelector( "#"+name ));
         this.envelope = new Envelope( this.envelope_ui, document.querySelector('#env_graph'), this );
 
-        this.keys = [
+/*         this.keys = [
             "c3","c3s","d3","d3s","e3","f3","f3s","g3","g3s","a3","a3s","b3",
             "c4","c4s","d4","d4s","e4","f4","f4s","g4","g4s","a4","a4s","b4"
-        ];
+        ]; */
         // 12平均律
         this.freq = {
-            "c3":   130.81, // c3
+/*             "c3":   130.81, // c3
             "c3s":  138.59,
             "d3":   146.83,
             "d3s":  155.56,
-            "e3":   164.81,
+            "e3":   164.81, */
             "f3":   174.61,
             "f3s":  185.00,
             "g3":   196.00,
@@ -63,14 +63,19 @@ class SynthUI {
             "a4":   440.00, // a4
             "a4s":  466.16,
             "b4":   493.88,
+            "c5":   523.26, // c5
+            "c5s":  554.36,
+            "d5":   587.32,
+            "d5s":  622.26,
+            "e5":   659.26,
         };
         // 純正律
         this.freq2 = {
-            "c3":   132.00, // c3
+/*             "c3":   132.00, // c3
             "c3s":  140.80,
             "d3":   148.50,
             "d3s":  158.40,
-            "e3":   165.00,
+            "e3":   165.00, */
             "f3":   176.00,
             "f3s":  187.00,
             "g3":   198.00,
@@ -90,6 +95,11 @@ class SynthUI {
             "a4":   440.00, // a4
             "a4s":  475.20,
             "b4":   493.88,
+            "c5":   528.00, // c3
+            "c5s":  563.20,
+            "d5":   587.33,
+            "d5s":  633.60,
+            "e5":   659.27,
         };
     }
 
@@ -145,16 +155,55 @@ class SynthUI {
             this.set_envelope( [ 0.0, 0.0, 1.0, 0.0 ] );
             this.envelope.draw_graph();
         });
-        document.querySelector('#piano').addEventListener('click', () => {
+        // document.querySelector('#triangle').addEventListener('click', () => {
+        //     let dummy_array = new Array(21);
+        //     // for( let i=1; i<=20; i++ ) {
+        //     //     let j = i * 2.0 + 1.0;
+        //     //     dummy_array[i] = 1.0 / j;
+        //     // }
+        //     // dummy_array[0] = 0.0;
+        //     for( let i=0; i<=20; i++ ) {
+        //         dummy_array[i] = 0;
+        //     }
+        //     let sign = 1;
+        //     for( let i=1; i<=20; i+=2 ) {
+        //         dummy_array[i] = sign / ( i * i );
+        //         sign *= -1;
+        //     }
+        //     this.set_spectrum( dummy_array );
+        //     this.wave.draw( dummy_array );
+        //     this.set_envelope( [ 0.0, 0.0, 1.0, 0.0 ] );
+        //     this.envelope.draw_graph();
+        // });
+        document.querySelector('#square').addEventListener('click', () => {
+            let dummy_array = new Array(21);
+            for( let i=0; i<=20; i++ ) {
+                dummy_array[i] = 0;
+            }
+            for( let i=1; i<=20; i+=2 ) {
+                dummy_array[i] = 1.0 / i;
+            }
+            this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
+            this.set_envelope( [ 0.0, 0.0, 1.0, 0.0 ] );
+            this.envelope.draw_graph();
+        });
+         document.querySelector('#piano').addEventListener('click', () => {
             let dummy_array = new Array(21);
             for( let i=0; i<=20; i++ ) {
                 dummy_array[i] = 0;
             }
             //dummy_array[1] = 1;
-            for( let i=1; i<=6; i++ )  dummy_array[i] = 1.0/i;
+            // ブザーっぽい音
+            //for( let i=1; i<=15; i++ )  dummy_array[i] = i * 0.05;
+            dummy_array[1] = 1.0;
+            dummy_array[2] = 0.2;
+            dummy_array[3] = 0.1;
+            dummy_array[4] = 0.2;
+
             this.set_spectrum( dummy_array );
             this.wave.draw( dummy_array );
-            this.set_envelope( [ 0.01, 0.9, 0, 0]);
+            this.set_envelope( [ 0.01, 0.9, 0.2, 0.2]);
             this.envelope.draw_graph();
         });
         document.querySelector('#organ').addEventListener('click', () => {
@@ -165,7 +214,7 @@ class SynthUI {
             for( let i=1; i<=20; i+=2 )  dummy_array[i] = 1.0/i;
             this.set_spectrum( dummy_array );
             this.wave.draw( dummy_array );
-            this.set_envelope( [ 0.01, 0.9, 1, 0.2]);
+            this.set_envelope( [ 0.01, 0.9, 0.8, 0.2]);
             this.envelope.draw_graph();
         });
         document.querySelector('#violin').addEventListener('click', () => {
@@ -175,7 +224,7 @@ class SynthUI {
             }
             this.set_spectrum( dummy_array );
             this.wave.draw( dummy_array );
-            this.set_envelope( [ 0.01, 0.9, 1, 0.2]);
+            this.set_envelope( [ 0.2, 0.9, 1, 0.2]);
             this.envelope.draw_graph();
         });
         document.querySelector('#clarinet').addEventListener('click', () => {
@@ -183,8 +232,11 @@ class SynthUI {
             for( let i=0; i<=20; i++ ) {
                 dummy_array[i] = 0;
             }
-            //dummy_array[1] = 1;
-            for( let i=1; i<=7; i+=2 )  dummy_array[i] = 1.0/i;
+            dummy_array[1] = 0.8;
+            dummy_array[2] = 0.2;
+            dummy_array[3] = 1.0;
+            dummy_array[4] = 0.7;
+            dummy_array[5] = 0.2;
             this.set_spectrum( dummy_array );
             this.wave.draw( dummy_array );
             this.set_envelope( [ 0.1, 1.0, 0, 0.3]);
@@ -195,12 +247,29 @@ class SynthUI {
             for( let i=0; i<=20; i++ ) {
                 dummy_array[i] = 0;
             }
-            dummy_array[1] = 0.5;
+            //dummy_array[1] = 1;
+            for( let i=1; i<=5; i+=2 )  dummy_array[i] = 1.0/i;
+/*             dummy_array[1] = 0.5;
             dummy_array[2] = 0.8;
-            dummy_array[3] = 0.3;
+            dummy_array[3] = 0.3; */
             this.set_spectrum( dummy_array );
             this.wave.draw( dummy_array );
             this.set_envelope( [ 0.1, 0.0, 0.9, 0.3]);
+            this.envelope.draw_graph();
+        });
+        document.querySelector('#trumpet').addEventListener('click', () => {
+            let dummy_array = new Array(21);
+            for( let i=0; i<=20; i++ ) {
+                dummy_array[i] = 0;
+            }
+            dummy_array[1] = 1.0;
+            dummy_array[2] = 0.9;
+            dummy_array[3] = 0.8;
+            dummy_array[4] = 0.2;
+            dummy_array[5] = 0.2;
+            this.set_spectrum( dummy_array );
+            this.wave.draw( dummy_array );
+            this.set_envelope( [ 0.2, 0.0, 0.9, 0.3]);
             this.envelope.draw_graph();
         });
     }
@@ -209,7 +278,7 @@ class SynthUI {
      * 鍵盤関係のイベントを設定する
      */
     set_keyboard() {
-        for( let [key, value] of Object.entries(this.freq) ) {
+        for( let [key, value] of Object.entries(this.freq2) ) {
             let playing = false;
             let tone;
             document.querySelector('#' + key).addEventListener("mousedown", () => {

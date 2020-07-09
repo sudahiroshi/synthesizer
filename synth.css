@@ -58,6 +58,12 @@ input[name="tab_item"] {
   color: #fff;
 }
 
+.instrument {
+  width: 8em;
+}
+.inline {
+  display: inline-block;
+}
 .keybord {
   display: block;
   width: 842px;

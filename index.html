@@ -27,17 +27,24 @@
 
       <div class="tab_content" id="instrument_content">
         <div class="tab_content_description">
-          <p class="c-txtsp">
-              <button id="sin">sin波</button>単純な波形の例<br>
-              <button id="piano">ピアノ</button>奇数倍音で構成された音<br>
-              <button id="organ">オルガン</button>奇数倍音で構成され，音量が下がりにくい<br>
-              <button id="violin">バイオリン</button>高い周波数まで含まれる<br>
-              <button id="clarinet">クラリネット</button>奇数倍音<br>
-              <button id="flute">フルート</button>低めの周波数のみ<br>
-          </p>
+
+            <div class="inline">
+
+              <button class="instrument" id="piano">ピアノ</button>奇数倍音で構成された音<br>
+              <button class="instrument" id="organ">オルガン</button>奇数倍音で構成される<br>
+              <button class="instrument" id="violin">バイオリン</button>高い周波数まで含まれる<br>
+              <button class="instrument" id="clarinet">クラリネット</button>奇数かつ低目の倍音で構成される<br>
+              <button class="instrument" id="flute">フルート</button>低い周波数のみで構成される<br>
+              <button class="instrument" id="trumpet">トランペット</button>低い周波数のみで構成される<br>
+            </div>
+            <div class="inline">
+              <button class="instrument" id="sin">sin波</button>単純な波形の例<br>
+              <!-- <button class="instrument" id="triangle">三角波</button>単純な波形の例<br> -->
+              <button class="instrument" id="square">矩形波</button>単純な波形の例<br>
+            </div>
         </div>
         <div class="keybord" ontouchstart="">
-          <div class="key">
+<!--           <div class="key">
             <div class="white_key" id="c3"></div>
             <div class="brack_key" id="c3s"></div>
           </div>
@@ -47,7 +54,7 @@
           </div>
           <div class="key">
             <div class="white_key" id="e3"></div>
-          </div>
+          </div> -->
           <div class="key">
             <div class="white_key" id="f3"></div>
             <div class="brack_key" id="f3s"></div>
@@ -90,6 +97,19 @@
           <div class="key">
             <div class="white_key" id="b4"></div>
           </div>
+
+          <div class="key">
+            <div class="white_key" id="c5"></div>
+            <div class="brack_key" id="c5s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="d5"></div>
+            <div class="brack_key" id="d5s"></div>
+          </div>
+          <div class="key">
+            <div class="white_key" id="e5"></div>
+          </div>
+
         </div>
       </div>
       <div class="tab_content" id="spectrum_content">
@@ -97,9 +117,9 @@
           <p class="c-txtsp">
               <input type="range" name="x00" id="x00" orient="vertical" class="invisible" min="0" max="1" step="0.01" value="0">
               <input type="range" name="x01" id="x01" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">
-              <input type="range" name="x02" id="x02" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x03" id="x03" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x04" id="x04" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+              <input type="range" name="x02" id="x02" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
+              <input type="range" name="x03" id="x03" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.1">
+              <input type="range" name="x04" id="x04" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
               <input type="range" name="x05" id="x05" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
               <input type="range" name="x06" id="x06" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
               <input type="range" name="x07" id="x07" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
@@ -124,11 +144,11 @@
         <div class="tab_content_description">
             <div>
                 <canvas id="env_canvas" width="400px" height="150px"></canvas>
-                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="1">            </div>
+                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="0.2">            </div>
             </div>
-            <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.0">
-            <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.0">
-            <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.0">
+            <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.01">
+            <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.9">
+            <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.2">
             <canvas id="env_graph" width="800px" height="200px"></canvas>
       </div>
     </div>
