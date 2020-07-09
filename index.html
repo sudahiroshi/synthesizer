@@ -12,146 +12,146 @@
     <link rel="stylesheet" href="synth.css" />
   </head>
   <body>
-    <div class="tabs">
-      <input id="instrument" type="radio" name="tab_item" checked />
-      <label class="tab_item" for="instrument">楽器選択</label>
-
-      <input id="spectrum" type="radio" name="tab_item" />
-      <label class="tab_item" for="spectrum">スペクトル</label>
-
-      <input id="envelope" type="radio" name="tab_item" />
-      <label class="tab_item" for="envelope">エンベロープ</label>
-
-<!--       <input id="wave" type="radio" name="tab_item" />
-      <label class="tab_item" for="wave">波形</label> -->
-
-      <div class="tab_content" id="instrument_content">
-        <div class="tab_content_description">
-
-            <div class="inline">
-
-              <button class="instrument" id="piano">ピアノ</button>奇数倍音で構成された音<br>
-              <button class="instrument" id="organ">オルガン</button>奇数倍音で構成される<br>
-              <button class="instrument" id="violin">バイオリン</button>高い周波数まで含まれる<br>
-              <button class="instrument" id="clarinet">クラリネット</button>奇数かつ低目の倍音で構成される<br>
-              <button class="instrument" id="flute">フルート</button>低い周波数のみで構成される<br>
-              <button class="instrument" id="trumpet">トランペット</button>低い周波数のみで構成される<br>
-            </div>
-            <div class="inline">
-              <button class="instrument" id="sin">sin波</button>単純な波形の例<br>
-              <!-- <button class="instrument" id="triangle">三角波</button>単純な波形の例<br> -->
-              <button class="instrument" id="square">矩形波</button>単純な波形の例<br>
-            </div>
-        </div>
-        <div class="keybord" ontouchstart="">
-<!--           <div class="key">
-            <div class="white_key" id="c3"></div>
-            <div class="brack_key" id="c3s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="d3"></div>
-            <div class="brack_key" id="d3s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="e3"></div>
-          </div> -->
-          <div class="key">
-            <div class="white_key" id="f3"></div>
-            <div class="brack_key" id="f3s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="g3"></div>
-            <div class="brack_key" id="g3s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="a3"></div>
-            <div class="brack_key" id="a3s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="b3"></div>
-          </div>
-    
-          <div class="key">
-            <div class="white_key" id="c4"></div>
-            <div class="brack_key" id="c4s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="d4"></div>
-            <div class="brack_key" id="d4s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="e4"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="f4"></div>
-            <div class="brack_key" id="f4s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="g4"></div>
-            <div class="brack_key" id="g4s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="a4"></div>
-            <div class="brack_key" id="a4s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="b4"></div>
-          </div>
-
-          <div class="key">
-            <div class="white_key" id="c5"></div>
-            <div class="brack_key" id="c5s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="d5"></div>
-            <div class="brack_key" id="d5s"></div>
-          </div>
-          <div class="key">
-            <div class="white_key" id="e5"></div>
-          </div>
-
-        </div>
+    <input type="checkbox" class="acc-check" id="acc-inst" checked="checked">
+    <label for="acc-inst" class="acc-label">楽器選択</label>
+    <div class="acc-content">
+      <div class="inline">
+        <button class="instrument" id="piano">ピアノ</button>奇数倍音で構成された音<br>
+        <button class="instrument" id="organ">オルガン</button>奇数倍音で構成される<br>
+        <button class="instrument" id="violin">バイオリン</button>高い周波数まで含まれる<br>
+        <button class="instrument" id="clarinet">クラリネット</button>奇数かつ低目の倍音で構成される<br>
+        <button class="instrument" id="flute">フルート</button>低い周波数のみで構成される<br>
+        <button class="instrument" id="trumpet">トランペット</button>低い周波数のみで構成される<br>
       </div>
-      <div class="tab_content" id="spectrum_content">
-        <div class="tab_content_description">
-          <p class="c-txtsp">
-              <input type="range" name="x00" id="x00" orient="vertical" class="invisible" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x01" id="x01" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">
-              <input type="range" name="x02" id="x02" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
-              <input type="range" name="x03" id="x03" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.1">
-              <input type="range" name="x04" id="x04" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
-              <input type="range" name="x05" id="x05" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x06" id="x06" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x07" id="x07" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x08" id="x08" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x09" id="x09" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x10" id="x10" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x11" id="x11" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x12" id="x12" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x13" id="x13" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x14" id="x14" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x15" id="x15" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x16" id="x16" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x17" id="x17" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x18" id="x18" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x19" id="x19" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-              <input type="range" name="x20" id="x20" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
-          </p>
-        </div>
-        <canvas id="wave_graph" width="800px" height="200px"></canvas>
-      </div>
-      <div class="tab_content" id="envelope_content">
-        <div class="tab_content_description">
-            <div>
-                <canvas id="env_canvas" width="400px" height="150px"></canvas>
-                <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="0.2">            </div>
-            </div>
-            <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.01">
-            <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.9">
-            <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.2">
-            <canvas id="env_graph" width="800px" height="200px"></canvas>
+      <div class="inline">
+        <button class="instrument" id="sin">sin波</button>単純な波形の例<br>
+        <!-- <button class="instrument" id="triangle">三角波</button>単純な波形の例<br> -->
+        <button class="instrument" id="square">矩形波</button>単純な波形の例<br>
       </div>
     </div>
 
+    <input type="checkbox" class="acc-check" id="acc-spectrum">
+    <label for="acc-spectrum" class="acc-label">スペクトル</label>
+    <div class="acc-content">
+      <p class="c-txtsp">
+        <input type="range" name="x00" id="x00" orient="vertical" class="invisible" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x01" id="x01" orient="vertical" class="vert" min="0" max="1" step="0.01" value="1">
+        <input type="range" name="x02" id="x02" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
+        <input type="range" name="x03" id="x03" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.1">
+        <input type="range" name="x04" id="x04" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0.2">
+        <input type="range" name="x05" id="x05" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x06" id="x06" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x07" id="x07" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x08" id="x08" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x09" id="x09" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x10" id="x10" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x11" id="x11" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x12" id="x12" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x13" id="x13" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x14" id="x14" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x15" id="x15" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x16" id="x16" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x17" id="x17" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x18" id="x18" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x19" id="x19" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+        <input type="range" name="x20" id="x20" orient="vertical" class="vert" min="0" max="1" step="0.01" value="0">
+    </p>
+    </div>
+
+    <input type="checkbox" class="acc-check" id="acc-wave">
+    <label for="acc-wave" class="acc-label">波形のグラフ</label>
+    <div class="acc-content">
+      <canvas id="wave_graph" width="800px" height="200px"></canvas>
+    </div>
+
+    <input type="checkbox" class="acc-check" id="acc-envelope">
+    <label for="acc-envelope" class="acc-label">エンベロープ</label>
+    <div class="acc-content">
+      <div>
+        <canvas id="env_canvas" width="400px" height="150px"></canvas>
+        <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="0.2">
+      </div>
+      <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.01">
+      <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.9">
+      <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.2">
+    </div>
+
+    <input type="checkbox" class="acc-check" id="acc-envelope-graph">
+    <label for="acc-envelope-graph" class="acc-label">エンベロープのグラフ</label>
+    <div class="acc-content" id="frame-envelope">
+      <canvas id="env_graph" width="800px" height="200px"></canvas>
+    </div>
+
+    <input type="checkbox" class="acc-check" id="acc-keyboard" checked="checked">
+    <label for="acc-keyboard" class="acc-label">鍵盤</label>
+    <div class="acc-content" id="frame-keyboard">
+      <div class="keybord" ontouchstart="">
+        <!--           <div class="key">
+                    <div class="white_key" id="c3"></div>
+                    <div class="brack_key" id="c3s"></div>
+                  </div>
+                  <div class="key">
+                    <div class="white_key" id="d3"></div>
+                    <div class="brack_key" id="d3s"></div>
+                  </div>
+                  <div class="key">
+                    <div class="white_key" id="e3"></div>
+                  </div> -->
+        <div class="key">
+          <div class="white_key" id="f3"></div>
+          <div class="brack_key" id="f3s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="g3"></div>
+          <div class="brack_key" id="g3s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="a3"></div>
+          <div class="brack_key" id="a3s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="b3"></div>
+        </div>
+
+        <div class="key">
+          <div class="white_key" id="c4"></div>
+          <div class="brack_key" id="c4s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="d4"></div>
+          <div class="brack_key" id="d4s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="e4"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="f4"></div>
+          <div class="brack_key" id="f4s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="g4"></div>
+          <div class="brack_key" id="g4s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="a4"></div>
+          <div class="brack_key" id="a4s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="b4"></div>
+        </div>
+
+        <div class="key">
+          <div class="white_key" id="c5"></div>
+          <div class="brack_key" id="c5s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="d5"></div>
+          <div class="brack_key" id="d5s"></div>
+        </div>
+        <div class="key">
+          <div class="white_key" id="e5"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

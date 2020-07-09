@@ -138,3 +138,42 @@ input[name="tab_item"] {
 .invisible {
     display: none;
 }
+
+.acc-check {
+  display: none;
+}
+
+.acc-label {
+  background: #0068b7;
+  color: #fff;
+  display: block;
+  margin-bottom: 1px;
+  padding: 10px;
+  position: relative;
+}
+
+.acc-label:after {
+  background: #0068b7;
+  content: '[open]';
+}
+
+.acc-content {
+  border: 1px solid #333;
+  display: block;
+  height: 0;
+  opacity: 0;
+  padding: 0 10px;
+  transition: .5s;
+  visibility: hidden;
+}
+
+.acc-check:checked + .acc-label:after {
+  content: '[close]';
+}
+
+.acc-check:checked + .acc-label + .acc-content {
+  height: 180px;
+  opacity: 1;
+  padding: 10px;
+  visibility: visible;
+}
