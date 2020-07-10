@@ -16,17 +16,17 @@
     <label for="acc-inst" class="acc-label">楽器選択</label>
     <div class="acc-content">
       <div class="inline">
-        <button class="instrument" id="piano">ピアノ</button>奇数倍音で構成された音<br>
+        <button class="instrument" id="piano">ピアノ</button>基音と味付けに2〜4倍波が含まれる<br>
         <button class="instrument" id="organ">オルガン</button>奇数倍音で構成される<br>
         <button class="instrument" id="violin">バイオリン</button>高い周波数まで含まれる<br>
-        <button class="instrument" id="clarinet">クラリネット</button>奇数かつ低目の倍音で構成される<br>
-        <button class="instrument" id="flute">フルート</button>低い周波数のみで構成される<br>
-        <button class="instrument" id="trumpet">トランペット</button>低い周波数のみで構成される<br>
+        <button class="instrument" id="clarinet">クラリネット</button>基音よりも3倍波が大きい<br>
+        <button class="instrument" id="flute">フルート</button>奇数倍音かつ低い周波数のみで構成される<br>
+        <button class="instrument" id="trumpet">トランペット</button>基音と2,3倍波が主で構成される<br>
       </div>
       <div class="inline">
-        <button class="instrument" id="sin">sin波</button>単純な波形の例<br>
+        <button class="instrument" id="sin">sin波</button>最も単純な波形の例<br>
         <!-- <button class="instrument" id="triangle">三角波</button>単純な波形の例<br> -->
-        <button class="instrument" id="square">矩形波</button>単純な波形の例<br>
+        <button class="instrument" id="square">矩形波</button>奇数倍音で構成される<br>
       </div>
     </div>
 
@@ -70,10 +70,14 @@
       <div>
         <canvas id="env_canvas" width="400px" height="150px"></canvas>
         <input type="range" name="sustain" id="sustain" orient="vertical" class="vert" min="0.01" max="1" step="0.01" value="0.2">
+        <label for="sustain">Sustain</label>
       </div>
       <input type="range" name="attack" id="attack"min="0.01" max="1" step="0.01" value="0.01">
+      <label for="attalk" class="red">Attack</label>
       <input type="range" name="decay" id="decay"min="0.01" max="1" step="0.01" value="0.9">
+      <label for="decay" class="green">Decay</label>
       <input type="range" name="release" id="release"min="0.01" max="1" step="0.01" value="0.2">
+      <label for="release" class="purple">Release</label>
     </div>
 
     <input type="checkbox" class="acc-check" id="acc-envelope-graph">

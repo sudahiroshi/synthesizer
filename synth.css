@@ -177,3 +177,15 @@ input[name="tab_item"] {
   padding: 10px;
   visibility: visible;
 }
+
+.red {
+  color: #bb2222;
+}
+
+.green {
+  color: #22bb22;
+}
+
+.purple {
+  color: #8822cc;
+}
